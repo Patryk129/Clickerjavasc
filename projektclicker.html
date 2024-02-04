@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projekt</title>
+    <style>
+        table,th, td{
+            border: 1px solid;;
+        }
+        td{
+            width: 100px;
+            height: 100px;
+        }
+        #myProgress {
+        width: 50%;
+        background-color: #ddd;
+        }
+
+        #myBar {
+        width: 1%;
+        height: 30px;
+        background-color: #04AA6D;
+        }
+        #poziom{
+            text-align: center;
+        }
+        input{
+            margin: 30px;
+        }
+        p{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <table id="tabela">
+        <tr>
+            <td colspan="4"><p id="poziom"></p></td>
+        </tr>
+        <tr>
+            <td><input type='button' value='+' onclick='wybudujBudynek(budynek1,this.id)' id="1"></td>
+            <td><input type='button' value='+' onclick='wybudujBudynek(budynek2,this.id)' id="2"></td>
+            <td><input type='button' value='+' onclick='wybudujBudynek(budynek3,this.id)' id="3"></td>
+            <td>Zarobki:<p id="zarobki"></p></td>
+        </tr>
+        <tr>
+            <td><input type='button' value='+' onclick='wybudujBudynek(budynek4,this.id)' id="4"></td>
+            <td><input type='button' value='+' onclick='wybudujBudynek(budynek5,this.id)' id="5"></td>
+            <td><input type='button' value='+' onclick='wybudujBudynek(budynek6,this.id)' id="6"></td>
+            <td><p id="info"></p><p id="update"></p><p id="cena"></p></td>
+        </tr>
+        <tr>
+            <td><input type='button' value='+' onclick='wybudujBudynek(budynek7,this.id)' id="7"></td>
+            <td><input type='button' value='+' onclick='wybudujBudynek(budynek8,this.id)' id="8"></td>
+            <td><input type='button' value='+' onclick='wybudujBudynek(budynek9,this.id)' id="9"></td>
+            <td>Surowiec:<p id="surowiec"></p></td>
+        </tr>
+    </table>
+    <div id="myProgress">
+        <div id="myBar"></div>
+      </div>
+    <script>
+    /*
+    class budynek
+    {
+        nazwa;
+        zarobki = 1;
+        zdjecie;
+        function konstruktor()
+        {
+
+        }
+    }
+    */
+   class Cgracz
+   {
+        zarobki = 0;
+        budynki = 0;
+        surowiec = 'drewno';
+        poziom = 1;
+        ulepszenia = 0;
+   }
+   gracz = new Cgracz;
+
+    function budynek(nazwa, zarobki=0, zdjecie,koszt=0) {
+        this.nazwa = nazwa;
+        this.zarobki = zarobki;
+        this.zdjecie = zdjecie;
+        this.koszt = koszt;
+    }
+    var budynek1 = new budynek('budynek1');
+    var budynek2 = new budynek('budynek2');
+    var budynek3 = new budynek('budynek3');
+    var budynek4 = new budynek('budynek4');
+    var budynek5 = new budynek('budynek5');
+    var budynek6 = new budynek('budynek6');
+    var budynek7 = new budynek('budynek7');
+    var budynek8 = new budynek('budynek8');
+    var budynek9 = new budynek('budynek9');
+
+    var cena = 0;
+
+    function nowypoziom()
+    {
+        document.getElementById('1').innerHTML = ""
+    } 
+    function wybudujBudynek(budynek,id) {
+        // Znajdź element przycisku
+        if(gracz.zarobki >= cena)
+        {
+            gracz.zarobki -= cena;
+            var przycisk = document.getElementById(id);
+            budynek.zarobki = 1;
+            budynek.zdjecie = 'test';
+            // Utwórz nowy element obrazka
+            var nowy = document.createElement('input');
+            //img.src = budynek1.zdjecie; // 
+            nowy.value = budynek.nazwa;
+            nowy.type = 'button';
+            //var wypisz = budynekwypisz(budynek);
+            //img.onclick = a();
+            for(var i = 1;i<=9;i++)
+            {
+                if(budynek.nazwa == 'budynek'+i)
+                    nowy.setAttribute("onclick",'budynekwypisz(budynek'+i+')');
+            }
+            przycisk.parentNode.replaceChild(nowy, przycisk);
+            gracz.budynki += 1;
+            cena = budynek.zarobki * 100;
+            updateGame();
+        }
+        
+    }
+
+    function budynekwypisz(budynek)
+    {
+        document.getElementById('info').innerHTML = budynek.nazwa,"  ", budynek.zarobki;
+        var rodzic = document.getElementById('update');
+        var update = document.createElement('input');
+        update.type = 'button';
+        update.value = "Ulepsz";
+        update.id = 'update';
+        for(var i = 1;i<=9;i++)
+        {
+            if(budynek.nazwa == 'budynek'+i)
+            update.setAttribute("onclick",'budynek1updejt(budynek'+i+')');
+        }
+        /*
+        else if(budynek.nazwa == 'budynek2')
+            update.setAttribute("onclick",'budynek1updejt(budynek2)');
+        else if(budynek.nazwa == 'budynek3')
+            update.setAttribute("onclick",'budynek1updejt(budynek3)');
+        else if(budynek.nazwa == 'budynek4')
+            update.setAttribute("onclick",'budynek1updejt(budynek4)');
+        else if(budynek.nazwa == 'budynek5')
+            update.setAttribute("onclick",'budynek1updejt(budynek5)');
+        else if(budynek.nazwa == 'budynek6')
+            update.setAttribute("onclick",'budynek1updejt(budynek6)');
+        else if(budynek.nazwa == 'budynek7')
+            update.setAttribute("onclick",'budynek1updejt(budynek7)');
+        else if(budynek.nazwa == 'budynek8')
+            update.setAttribute("onclick",'budynek1updejt(budynek8)');
+        else 
+            update.setAttribute("onclick",'budynek1updejt(budynek9)');
+        */
+        rodzic.parentNode.replaceChild(update,rodzic);
+    }
+    function budynek1updejt(budynek)
+    {
+        console.log(budynek.nazwa,"updejt");
+        if(gracz.zarobki>=budynek.zarobki*10)
+        {
+            gracz.zarobki - budynek.zarobki*10;
+            budynek.zarobki = budynek.zarobki*5;
+            gracz.update +=1;
+        }
+    }
+    function updateGame() 
+    {
+        switch(gracz.budynki)
+        {
+            case 1:
+                gracz.zarobki += budynek1.zarobki;
+                break;
+            case 2:
+                gracz.zarobki += budynek1.zarobki + budynek2.zarobki;
+                //console.log("dwa budynki");
+                break;
+            case 3:
+                gracz.zarobki += budynek1.zarobki + budynek2.zarobki + budynek3.zarobki;
+                break;
+            case 4:
+                gracz.zarobki += budynek1.zarobki + budynek2.zarobki + budynek3.zarobki + budynek4.zarobki ;
+                break;
+            case 5:
+                gracz.zarobki += budynek1.zarobki + budynek2.zarobki + budynek3.zarobki + budynek4.zarobki + budynek5.zarobki ;
+                break;
+            case 6:
+                gracz.zarobki += budynek1.zarobki + budynek2.zarobki + budynek3.zarobki + budynek4.zarobki + budynek5.zarobki+ budynek6.zarobki;
+                break;
+            case 7:
+                gracz.zarobki += budynek1.zarobki + budynek2.zarobki + budynek3.zarobki + budynek4.zarobki+ budynek5.zarobki+ budynek6.zarobki + budynek7.zarobki;
+                break;
+            case 8:
+                gracz.zarobki += budynek1.zarobki + budynek2.zarobki + budynek3.zarobki + budynek4.zarobki+ budynek5.zarobki+ budynek6.zarobki + budynek7.zarobki + budynek8.zarobki;
+                break;
+            case 9:
+                gracz.zarobki += budynek1.zarobki + budynek2.zarobki + budynek3.zarobki + budynek4.zarobki+ budynek5.zarobki+ budynek6.zarobki + budynek7.zarobki + budynek8.zarobki + budynek9.zarobki;
+                break;
+
+        }
+        document.getElementById('zarobki').innerHTML = gracz.zarobki;
+        document.getElementById('cena').innerHTML = cena;
+        document.getElementById('surowiec').innerHTML = gracz.surowiec;
+        document.getElementById('poziom').innerHTML = "Poziom"+gracz.poziom;
+        var elem = document.getElementById("myBar");
+        var id = setInterval(frame, 10);
+        //var progres = gracz.budynki + gracz.update;
+        //console.log(progres);
+        //console.log(gracz.budynki);
+        //console.log(gracz.update);
+        function frame()
+        {
+            if (gracz.budynki >= 9) {
+                clearInterval(id);
+            } else {
+                elem.style.width = gracz.budynki*10 + "%";
+            }
+        }
+        setTimeout(updateGame, 1000); // Aktualizacja co 1 sekundę
+    }
+    </script>
+</body>
+</html>
