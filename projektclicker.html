@@ -39,8 +39,8 @@
             <td colspan="4"><p id="poziom"></p></td>
         </tr>
         <tr>
-            <td><input type='button' value='+' onclick='wybudujBudynek(budynek1,this.id)' id="1"></td>
-            <td><input type='button' value='+' onclick='wybudujBudynek(budynek2,this.id)' id="2"></td>
+            <td><input type='button' value='+' onclick='start(), wybudujBudynek(budynek1,this.id)' id="1"></td>
+            <td><input type='button' value='+' onclick='wybudujBudynek(budynek2,this.id)' id="2"></td>  
             <td><input type='button' value='+' onclick='wybudujBudynek(budynek3,this.id)' id="3"></td>
             <td>Zarobki:<p id="zarobki"></p></td>
         </tr>
@@ -61,6 +61,15 @@
         <div id="myBar"></div>
       </div>
     <script>
+    /* TO DO
+    1. pauza/odpauza
+    2. css i wyglad
+    3. kolejne poziomy
+    4. klasa surowiec
+    5. paski dla kazdego budynku
+    6. moze wrzuc funkcje w metody klasy
+    7. Ekran startu i ekran zwyciestwa
+    */
     /*
     class budynek
     {
@@ -100,7 +109,6 @@
     var budynek9 = new budynek('budynek9');
 
     var cena = 0;
-
     function nowypoziom()
     {
         document.getElementById('1').innerHTML = ""
@@ -108,8 +116,8 @@
     function wybudujBudynek(budynek,id) {
         // Znajdź element przycisku
         if(gracz.zarobki >= cena)
-        {
-            gracz.zarobki -= cena;
+        {   
+            gracz.zarobki = gracz.zarobki - cena;
             var przycisk = document.getElementById(id);
             budynek.zarobki = 1;
             budynek.zdjecie = 'test';
@@ -123,12 +131,23 @@
             for(var i = 1;i<=9;i++)
             {
                 if(budynek.nazwa == 'budynek'+i)
+                {
                     nowy.setAttribute("onclick",'budynekwypisz(budynek'+i+')');
+                    if(i<9)
+                    {
+                        document.getElementById(i+1).style.display = "block";
+                    }
+                }
             }
             przycisk.parentNode.replaceChild(nowy, przycisk);
             gracz.budynki += 1;
             cena = budynek.zarobki * 100;
+            
+            
             updateGame();
+            
+            
+    
         }
         
     }
@@ -171,7 +190,7 @@
         console.log(budynek.nazwa,"updejt");
         if(gracz.zarobki>=budynek.zarobki*10)
         {
-            gracz.zarobki - budynek.zarobki*10;
+            gracz.zarobki = gracz.zarobki - budynek.zarobki*10;
             budynek.zarobki = budynek.zarobki*5;
             gracz.update +=1;
         }
@@ -222,13 +241,21 @@
         //console.log(gracz.update);
         function frame()
         {
-            if (gracz.budynki >= 9) {
+            if (gracz.budynki >= 10) {
                 clearInterval(id);
             } else {
-                elem.style.width = gracz.budynki*10 + "%";
+                elem.style.width = gracz.budynki*11.1 + "%";
             }
         }
+        
         setTimeout(updateGame, 1000); // Aktualizacja co 1 sekundę
+    }
+    function start()
+    {
+        for(var i=2;i<=9;i++)
+            {
+                document.getElementById(i).style.display = "none";
+            }
     }
     </script>
 </body>
