@@ -31,6 +31,16 @@
         p{
             text-align: center;
         }
+        #progress {
+        width: 100%;
+        background-color: #ddd;
+        }
+
+        #bar {
+        width: 1%;
+        height: 30px;
+        background-color: #04AA6D;
+        }
     </style>
 </head>
 <body>
@@ -39,7 +49,9 @@
             <td colspan="4"><p id="poziom"></p></td>
         </tr>
         <tr>
-            <td><input type='button' value='+' onclick='start(), wybudujBudynek(budynek1,this.id)' id="1"></td>
+            <td><input type='button' value='+' onclick='start(), wybudujBudynek(budynek1,this.id)' id="1">
+                <div id="progress">
+                    <div id="bar"></div></td>
             <td><input type='button' value='+' onclick='wybudujBudynek(budynek2,this.id)' id="2"></td>  
             <td><input type='button' value='+' onclick='wybudujBudynek(budynek3,this.id)' id="3"></td>
             <td>Zarobki:<p id="zarobki"></p></td>
@@ -69,6 +81,7 @@
     5. paski dla kazdego budynku
     6. moze wrzuc funkcje w metody klasy
     7. Ekran startu i ekran zwyciestwa
+    8. NOWE ZARABIANIE!!!!!!!!!!!!!
     */
     /*
     class budynek
@@ -91,13 +104,30 @@
         ulepszenia = 0;
    }
    gracz = new Cgracz;
-
-    function budynek(nazwa, zarobki=0, zdjecie,koszt=0) {
+    function budynek(nazwa, zarobki=0, zdjecie,koszt=0) 
+    {
         this.nazwa = nazwa;
         this.zarobki = zarobki;
         this.zdjecie = zdjecie;
         this.koszt = koszt;
+        this.pasek = function()
+        {
+            var elem2 = document.getElementById("bar");
+            counter++;
+            console.log(counter);
+            //var id2 = setInterval(frame, 10);
+            //function frame()
+                if (counter > 5) {
+                    counter = 1
+                    elem2.style.width = counter*20 + "%";
+                } else {
+                    elem2.style.width = counter*20 + "%";
+                }
+            setInterval(this.pasek, 1000);
+            
+        } 
     }
+    var counter = 0;
     var budynek1 = new budynek('budynek1');
     var budynek2 = new budynek('budynek2');
     var budynek3 = new budynek('budynek3');
@@ -141,17 +171,13 @@
             }
             przycisk.parentNode.replaceChild(nowy, przycisk);
             gracz.budynki += 1;
-            cena = budynek.zarobki * 100;
-            
-            
+            cena = budynek.zarobki * 100;   
+            budynek.pasek();
+            ///zarabianie(budynek);                  
             updateGame();
-            
-            
-    
         }
         
     }
-
     function budynekwypisz(budynek)
     {
         document.getElementById('info').innerHTML = budynek.nazwa,"  ", budynek.zarobki;
@@ -248,7 +274,7 @@
             }
         }
         
-        setTimeout(updateGame, 1000); // Aktualizacja co 1 sekundę
+        setTimeout(updateGame, 5000); // Aktualizacja co 1 sekundę
     }
     function start()
     {
