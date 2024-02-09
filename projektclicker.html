@@ -80,6 +80,8 @@
     <div id="myProgress">
         <div id="myBar"></div>
       </div>
+      <input type="button" onclick="nowylvl()" id="nowylvl" value=">">
+      <input type="button" onclick="start()" id="start" value="start">
     <script>
     /* TO DO
     1. pauza/odpauza
@@ -91,6 +93,7 @@
     7. Ekran startu i ekran zwyciestwa
     8. +/- NOWE ZARABIANIE!!!!!!!!!!!!!
     *9. Power upy
+    10. /UPDATE NAPRAWWWW
     */
     /*
     class budynek
@@ -113,7 +116,7 @@
         ulepszenia = 0;
    }
    gracz = new Cgracz;
-    function budynek(nazwa, zarobki=0, zdjecie,koszt=0,pasekczas=1000) 
+    function Cbudynek(nazwa, zarobki=0, zdjecie,koszt=0,pasekczas=1000) 
     {
         this.nazwa = nazwa;
         this.zarobki = zarobki;
@@ -122,23 +125,20 @@
         this.pasekczas = pasekczas;
         this.pasek;
         this.counter = 0;
+        this.interval;
     }
-    var counter = 0;
-    var budynek1 = new budynek('budynek1');
-    var budynek2 = new budynek('budynek2');
-    var budynek3 = new budynek('budynek3');
-    var budynek4 = new budynek('budynek4');
-    var budynek5 = new budynek('budynek5');
-    var budynek6 = new budynek('budynek6');
-    var budynek7 = new budynek('budynek7');
-    var budynek8 = new budynek('budynek8');
-    var budynek9 = new budynek('budynek9');
-
+    var budynek1 = new Cbudynek('budynek1');
+    var budynek2 = new Cbudynek('budynek2');
+    var budynek3 = new Cbudynek('budynek3');
+    var budynek4 = new Cbudynek('budynek4');
+    var budynek5 = new Cbudynek('budynek5');
+    var budynek6 = new Cbudynek('budynek6');
+    var budynek7 = new Cbudynek('budynek7');
+    var budynek8 = new Cbudynek('budynek8');
+    var budynek9 = new Cbudynek('budynek9');
+    var blokada = true;
     var cena = 0;
-    function nowypoziom()
-    {
-        document.getElementById('1').innerHTML = ""
-    } 
+
     function pasek(budynek)
     {
         var elem2 = document.getElementById(budynek.pasek);
@@ -151,11 +151,12 @@
                 budynek.counter = 1;
                 elem2.style.width = budynek.counter*20 + "%";
                 updateGame();
+                //clearInterval(intervalid)
             } else {
                 elem2.style.width = budynek.counter*20 + "%";
             }
     }
-    let intervalid;
+    //let intervalid;
     function wybudujBudynek(budynek,id) {
         // Znajdź element przycisku
         //if(gracz.zarobki >= cena)
@@ -176,8 +177,10 @@
                 if(budynek.nazwa == 'budynek'+i)
                 {
                     nowy.setAttribute("onclick",'budynekwypisz(budynek'+i+')');
+                    nowy.id=i;
                     budynek.pasek = "bar"+i;
-                    console.log(budynek.pasek);
+                    document.getElementById('bar'+i).style.display = "block";
+                    //console.log(budynek.pasek);
                     if(i<9)
                     {
                         document.getElementById(i+1).style.display = "block";
@@ -189,7 +192,7 @@
             cena = budynek.zarobki * 100;   
             //budynek.pasek();
             ///zarabianie(budynek); 
-            intervalid = setInterval(() => pasek(budynek), budynek.pasekczas);    
+            budynek.interval = setInterval(() => pasek(budynek), budynek.pasekczas);    
             ///const intervalid2 = setInterval(budynek.zarabianie, 1000);          
             updateGame();
         }
@@ -231,13 +234,14 @@
     function budynek1updejt(budynek)
     {
         console.log(budynek.nazwa,"updejt");
-        if(gracz.zarobki>=budynek.zarobki*10)
+        //if(gracz.zarobki>=budynek.zarobki*10)
         {
             gracz.zarobki = gracz.zarobki - budynek.zarobki*10;
             budynek.zarobki = budynek.zarobki*5;
-            gracz.update +=1;
-            //clearInterval(intervalid);
-            const intervalid = setInterval(() => pasek(budynek), budynek.pasekczas);    
+            gracz.ulepszenia +=1;
+            clearInterval(budynek.interval);
+            budynek.interval = setInterval(() => pasek(budynek), budynek.pasekczas);
+            //const intervalid = setInterval(() => pasek(budynek), budynek.pasekczas);    
         }
     }
     function updateGame() 
@@ -286,10 +290,10 @@
         //console.log(gracz.update);
         function frame()
         {
-            if (gracz.budynki >= 10) {
-                clearInterval(id);
+            if (gracz.budynki+gracz.ulepszenia > 18) {
+                blokada = false
             } else {
-                elem.style.width = gracz.budynki*11.1 + "%";
+                elem.style.width = gracz.budynki*5.55 +gracz.ulepszenia*5.55 + "%";
             }
         }
         
@@ -297,10 +301,72 @@
     }
     function start()
     {
-        for(var i=2;i<=9;i++)
+        for(var i=1;i<=9;i++)
+        {
+            console.log('bar'+i);
+            document.getElementById('bar'+i).style.display = "none";
+            if(i>=2)
             {
                 document.getElementById(i).style.display = "none";
             }
+                
+        }
+    }
+    function wybudujprzycisk()
+    {
+        for(var i = 1;i<=9;i++)
+        {
+            var przycisk = document.getElementById(i);
+            var nowy = document.createElement('input');
+            nowy.value = '+';
+            nowy.type = 'button';
+            nowy.id=i;
+            nowy.setAttribute("onclick",'wybudujBudynek(budynek'+i+',this.id)');
+            przycisk.parentNode.replaceChild(nowy, przycisk);
+        }
+            
+    }
+    function nowylvl()
+    {
+        console.log('123')
+        gracz.poziom +=1;
+        //if(blokada == false)
+        //{
+            //for(var i = 1;i<=9;i++)
+            //{
+                //bud = "budynek"+i;
+                //console.log(bud)
+                clearInterval(budynek1.interval);
+                clearInterval(budynek2.interval);
+                clearInterval(budynek3.interval);
+                clearInterval(budynek4.interval);
+                clearInterval(budynek5.interval);
+                clearInterval(budynek6.interval);
+                clearInterval(budynek7.interval);
+                clearInterval(budynek8.interval);
+                clearInterval(budynek9.interval);
+                var elm = document.getElementById(budynek1.pasek).style.width = 1 +'%';
+                //console.log(elm)
+                document.getElementById(budynek2.pasek).style.width = 1 +'%';
+                document.getElementById(budynek3.pasek).style.width = 1 +'%';
+                document.getElementById(budynek4.pasek).style.width = 1 +'%';
+                document.getElementById(budynek5.pasek).style.width = 1 +'%';
+                document.getElementById(budynek6.pasek).style.width = 1 +'%';
+                document.getElementById(budynek7.pasek).style.width = 1 +'%';
+                document.getElementById(budynek8.pasek).style.width = 1 +'%';
+                document.getElementById(budynek9.pasek).style.width = 1 +'%';
+                budynek1.counter = 0;
+                budynek2.counter = 0;
+                budynek3.counter = 0;
+                budynek4.counter = 0;
+                budynek5.counter = 0;
+                budynek6.counter = 0;
+                budynek7.counter = 0;
+                budynek8.counter = 0;
+                budynek9.counter = 0;
+            start();
+            wybudujprzycisk();
+        //}}
     }
     </script>
 </body>
