@@ -420,7 +420,7 @@
                 zarobki = 1;
                 cena = 0;
                 document.getElementById("myBar").style.width = '1%';
-                document.getElementById('nowylvl').src = 'klodka.png';
+                document.getElementById('nowylvl').src = 'files/klodka.png';
                 if(gracz.poziom == 1)
                 {
                     surowiec.nazwa = 'Kamien';
