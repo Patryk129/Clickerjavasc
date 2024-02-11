@@ -4,370 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projekt</title>
-    <style>
-        table,th, td{
-            border: 1px solid;;
-        }
-        td{
-            width: 100px;
-            height: 100px;
-        }
-        #myProgress {
-        width: 50%;
-        background-color: #ddd;
-        }
-
-        #myBar {
-        width: 1%;
-        height: 30px;
-        background-color: #04AA6D;
-        }
-        #poziom{
-            text-align: center;
-        }
-        input{
-            margin: 30px;
-        }
-        p{
-            text-align: center;
-        }
-        #progress {
-        width: 100%;
-        background-color: #ddd;
-        }
-
-        #bar1,#bar2,#bar3,#bar4,#bar5,#bar6,#bar7,#bar8,#bar9 {
-        width: 1%;
-        height: 30px;
-        background-color: #04AA6D;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- <input type="button" onclick="start()" id="start" value="start"> -->
     <table id="tabela">
         <tr>
             <td colspan="4"><p id="poziom"></p></td>
         </tr>
         <tr>
-            <td><input type='button' value='+' onclick='wybudujBudynek(budynek1,this.id)' id="1">
-                <div id="progress">
-                    <div id="bar1"></div></td>
-            <td><input type='button' value='+' onclick='wybudujBudynek(budynek2,this.id)' id="2">
-                <div id="progress"><div id="bar2"></div></td>  
-            <td><input type='button' value='+' onclick='wybudujBudynek(budynek3,this.id)' id="3">
-                <div id="progress"><div id="bar3"></div></td>
-            <td>Zarobki:<p id="zarobki"></p></td>
+            <td class="budynki"><div id="progress1">
+                <div id="bar1"></div></div>
+                <input type='image' src="plus.png" onclick='wybudujBudynek(budynek1,this.id)' id="1">
+                </td>
+            <td class="budynki"><div id="progress2"><div id="bar2"></div></div><input type='image' src="plus.png" onclick='wybudujBudynek(budynek2,this.id)' id="2">
+                </td>  
+            <td class="budynki"><div id="progress3"><div id="bar3"></div></div><input type='image' src="plus.png" onclick='wybudujBudynek(budynek3,this.id)' id="3">
+                </td>
+            <td class="infor"><p>Zarobki:<p id="zarobki"></p></p></td>
         </tr>
         <tr>
-            <td><input type='button' value='+' onclick='wybudujBudynek(budynek4,this.id)' id="4">
-                <div id="progress"><div id="bar4"></div></td>
-            <td><input type='button' value='+' onclick='wybudujBudynek(budynek5,this.id)' id="5">
-                <div id="progress"><div id="bar5"></div></td>
-            <td><input type='button' value='+' onclick='wybudujBudynek(budynek6,this.id)' id="6">
-                <div id="progress"><div id="bar6"></div></td>
-            <td><p id="info"></p><p id="update"></p><p id="cena"></p></td>
+            <td class="budynki"><div id="progress4"><div id="bar4"></div></div><input type='image' src="plus.png" onclick='wybudujBudynek(budynek4,this.id)' id="4">
+                </td>
+            <td class="budynki"><div id="progress5"><div id="bar5"></div></div><input type='image' src="plus.png" onclick='wybudujBudynek(budynek5,this.id)' id="5">
+                </td>
+            <td class="budynki"><div id="progress6"><div id="bar6"></div></div><input type='image' src="plus.png" onclick='wybudujBudynek(budynek6,this.id)' id="6">
+                </td>
+            <td class="infor"><p id="info"><p id="surowiec"></p><img src="drewno.png" id="surowieczdj">
+                <!-- <p id="infoupdate"></p><p id="update"></p> -->
+                <div>Cena kolejnego budynku:<p id="cena"></p></div></td>
         </tr>
         <tr>
-            <td><input type='button' value='+' onclick='wybudujBudynek(budynek7,this.id)' id="7">
-                <div id="progress"><div id="bar7"></div></td>
-            <td><input type='button' value='+' onclick='wybudujBudynek(budynek8,this.id)' id="8">
-                <div id="progress"><div id="bar8"></div></td>
-            <td><input type='button' value='+' onclick='wybudujBudynek(budynek9,this.id)' id="9">
-                <div id="progress"><div id="bar9"></div></td>
-            <td>Surowiec:<p id="surowiec"></p></td>
+            <td class="budynki"><div id="progress7"><div id="bar7"></div></div><input type='image' src="plus.png" onclick='wybudujBudynek(budynek7,this.id)' id="7">
+                </td>
+            <td class="budynki"><div id="progress8"><div id="bar8"></div></div><input type='image' src="plus.png" onclick='wybudujBudynek(budynek8,this.id)' id="8">
+                </td>
+            <td class="budynki"><div id="progress9"><div id="bar9"></div></div><input type='image' src="plus.png" onclick='wybudujBudynek(budynek9,this.id)' id="9">
+                </td>
+            <td class="infor">Surowiec:<p id="surowiec"></p></td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div id="myProgress">
+                    <div id="myBar"></div>
+                  </div>
+            </td>
+            <td>
+                <input type="image" src='klodka.png' onclick="nowylvl()" id="nowylvl">
+            </td>
         </tr>
     </table>
-    <div id="myProgress">
-        <div id="myBar"></div>
-      </div>
-      <input type="button" onclick="nowylvl()" id="nowylvl" value=">">
-      <input type="button" onclick="start()" id="start" value="start">
-    <script>
-    /* TO DO
-    1. pauza/odpauza
-    2. css i wyglad
-    3. kolejne poziomy
-    4. klasa surowiec
-    5. /paski dla kazdego budynku
-    6. ?moze wrzuc funkcje w metody klasy
-    7. Ekran startu i ekran zwyciestwa
-    8. +/- NOWE ZARABIANIE!!!!!!!!!!!!!
-    *9. Power upy
-    10. /UPDATE NAPRAWWWW
-    */
-    /*
-    class budynek
-    {
-        nazwa;
-        zarobki = 1;
-        zdjecie;
-        function konstruktor()
-        {
+    <input type="image" src="pauza.png" onclick="pauza2()" id="pauza2">
+    <input type="image" src="tempo1.png" onclick="tempo1()" value=">" id="tempo1">
+    <input type="image" src="tempo2.png" onclick="tempo2()" value=">>" id="tempo2">
+    <input type="image" src="tempo2.png" onclick="tempo3()"value='>>>' id="tempo3">
+    <audio id="cash">
+        <source src="cash-register-purchase-87313.mp3" type="audio/ogg">
+    </audio>
+    <audio id="lvlaudio">
+        <source src="short-success-sound-glockenspiel-treasure-video-game-6346.mp3" type="audio/ogg">
+    </audio>
+    <audio id="wyplata">
+        <source src="collectcoin-6075.mp3" type="audio/ogg">
+    </audio>
 
-        }
-    }
-    */
-   class Cgracz
-   {
-        zarobki = 0;
-        budynki = 0;
-        surowiec = 'drewno';
-        poziom = 1;
-        ulepszenia = 0;
-   }
-   gracz = new Cgracz;
-    function Cbudynek(nazwa, zarobki=0, zdjecie,koszt=0,pasekczas=1000) 
-    {
-        this.nazwa = nazwa;
-        this.zarobki = zarobki;
-        this.zdjecie = zdjecie;
-        this.koszt = koszt;
-        this.pasekczas = pasekczas;
-        this.pasek;
-        this.counter = 0;
-        this.interval;
-    }
-    var budynek1 = new Cbudynek('budynek1');
-    var budynek2 = new Cbudynek('budynek2');
-    var budynek3 = new Cbudynek('budynek3');
-    var budynek4 = new Cbudynek('budynek4');
-    var budynek5 = new Cbudynek('budynek5');
-    var budynek6 = new Cbudynek('budynek6');
-    var budynek7 = new Cbudynek('budynek7');
-    var budynek8 = new Cbudynek('budynek8');
-    var budynek9 = new Cbudynek('budynek9');
-    var blokada = true;
-    var cena = 0;
-
-    function pasek(budynek)
-    {
-        var elem2 = document.getElementById(budynek.pasek);
-        budynek.counter++;
-        console.log(budynek.counter);
-        //var id2 = setInterval(frame, 10);
-        //function frame()
-            if (budynek.counter > 5) {
-                gracz.zarobki += budynek.zarobki;
-                budynek.counter = 1;
-                elem2.style.width = budynek.counter*20 + "%";
-                updateGame();
-                //clearInterval(intervalid)
-            } else {
-                elem2.style.width = budynek.counter*20 + "%";
-            }
-    }
-    //let intervalid;
-    function wybudujBudynek(budynek,id) {
-        // Znajdź element przycisku
-        //if(gracz.zarobki >= cena)
-        {   
-            gracz.zarobki = gracz.zarobki - cena;
-            var przycisk = document.getElementById(id);
-            budynek.zarobki = 1;
-            budynek.zdjecie = 'test';
-            // Utwórz nowy element obrazka
-            var nowy = document.createElement('input');
-            //img.src = budynek1.zdjecie; // 
-            nowy.value = budynek.nazwa;
-            nowy.type = 'button';
-            //var wypisz = budynekwypisz(budynek);
-            //img.onclick = a();
-            for(var i = 1;i<=9;i++)
-            {
-                if(budynek.nazwa == 'budynek'+i)
-                {
-                    nowy.setAttribute("onclick",'budynekwypisz(budynek'+i+')');
-                    nowy.id=i;
-                    budynek.pasek = "bar"+i;
-                    document.getElementById('bar'+i).style.display = "block";
-                    //console.log(budynek.pasek);
-                    if(i<9)
-                    {
-                        document.getElementById(i+1).style.display = "block";
-                    }
-                }
-            }
-            przycisk.parentNode.replaceChild(nowy, przycisk);
-            gracz.budynki += 1;
-            cena = budynek.zarobki * 100;   
-            //budynek.pasek();
-            ///zarabianie(budynek); 
-            budynek.interval = setInterval(() => pasek(budynek), budynek.pasekczas);    
-            ///const intervalid2 = setInterval(budynek.zarabianie, 1000);          
-            updateGame();
-        }
-        
-    } 
-    function budynekwypisz(budynek)
-    {
-        document.getElementById('info').innerHTML = budynek.nazwa,"  ", budynek.zarobki;
-        var rodzic = document.getElementById('update');
-        var update = document.createElement('input');
-        update.type = 'button';
-        update.value = "Ulepsz";
-        update.id = 'update';
-        for(var i = 1;i<=9;i++)
-        {
-            if(budynek.nazwa == 'budynek'+i)
-            update.setAttribute("onclick",'budynek1updejt(budynek'+i+')');
-        }
-        /*
-        else if(budynek.nazwa == 'budynek2')
-            update.setAttribute("onclick",'budynek1updejt(budynek2)');
-        else if(budynek.nazwa == 'budynek3')
-            update.setAttribute("onclick",'budynek1updejt(budynek3)');
-        else if(budynek.nazwa == 'budynek4')
-            update.setAttribute("onclick",'budynek1updejt(budynek4)');
-        else if(budynek.nazwa == 'budynek5')
-            update.setAttribute("onclick",'budynek1updejt(budynek5)');
-        else if(budynek.nazwa == 'budynek6')
-            update.setAttribute("onclick",'budynek1updejt(budynek6)');
-        else if(budynek.nazwa == 'budynek7')
-            update.setAttribute("onclick",'budynek1updejt(budynek7)');
-        else if(budynek.nazwa == 'budynek8')
-            update.setAttribute("onclick",'budynek1updejt(budynek8)');
-        else 
-            update.setAttribute("onclick",'budynek1updejt(budynek9)');
-        */
-        rodzic.parentNode.replaceChild(update,rodzic);
-    }
-    function budynek1updejt(budynek)
-    {
-        console.log(budynek.nazwa,"updejt");
-        //if(gracz.zarobki>=budynek.zarobki*10)
-        {
-            gracz.zarobki = gracz.zarobki - budynek.zarobki*10;
-            budynek.zarobki = budynek.zarobki*5;
-            gracz.ulepszenia +=1;
-            clearInterval(budynek.interval);
-            budynek.interval = setInterval(() => pasek(budynek), budynek.pasekczas);
-            //const intervalid = setInterval(() => pasek(budynek), budynek.pasekczas);    
-        }
-    }
-    function updateGame() 
-    {/*
-        switch(gracz.budynki)
-        {
-            case 1:
-                gracz.zarobki += budynek1.zarobki;
-                break;
-            case 2:
-                gracz.zarobki += budynek1.zarobki + budynek2.zarobki;
-                //console.log("dwa budynki");
-                break;
-            case 3:
-                gracz.zarobki += budynek1.zarobki + budynek2.zarobki + budynek3.zarobki;
-                break;
-            case 4:
-                gracz.zarobki += budynek1.zarobki + budynek2.zarobki + budynek3.zarobki + budynek4.zarobki ;
-                break;
-            case 5:
-                gracz.zarobki += budynek1.zarobki + budynek2.zarobki + budynek3.zarobki + budynek4.zarobki + budynek5.zarobki ;
-                break;
-            case 6:
-                gracz.zarobki += budynek1.zarobki + budynek2.zarobki + budynek3.zarobki + budynek4.zarobki + budynek5.zarobki+ budynek6.zarobki;
-                break;
-            case 7:
-                gracz.zarobki += budynek1.zarobki + budynek2.zarobki + budynek3.zarobki + budynek4.zarobki+ budynek5.zarobki+ budynek6.zarobki + budynek7.zarobki;
-                break;
-            case 8:
-                gracz.zarobki += budynek1.zarobki + budynek2.zarobki + budynek3.zarobki + budynek4.zarobki+ budynek5.zarobki+ budynek6.zarobki + budynek7.zarobki + budynek8.zarobki;
-                break;
-            case 9:
-                gracz.zarobki += budynek1.zarobki + budynek2.zarobki + budynek3.zarobki + budynek4.zarobki+ budynek5.zarobki+ budynek6.zarobki + budynek7.zarobki + budynek8.zarobki + budynek9.zarobki;
-                break;
-
-        }*/
-        document.getElementById('zarobki').innerHTML = gracz.zarobki;
-        document.getElementById('cena').innerHTML = cena;
-        document.getElementById('surowiec').innerHTML = gracz.surowiec;
-        document.getElementById('poziom').innerHTML = "Poziom"+gracz.poziom;
-        var elem = document.getElementById("myBar");
-        var id = setInterval(frame, 10);
-        //var progres = gracz.budynki + gracz.update;
-        //console.log(progres);
-        //console.log(gracz.budynki);
-        //console.log(gracz.update);
-        function frame()
-        {
-            if (gracz.budynki+gracz.ulepszenia > 18) {
-                blokada = false
-            } else {
-                elem.style.width = gracz.budynki*5.55 +gracz.ulepszenia*5.55 + "%";
-            }
-        }
-        
-        //setTimeout(updateGame, 5000); // Aktualizacja co 1 sekundę
-    }
-    function start()
-    {
-        for(var i=1;i<=9;i++)
-        {
-            console.log('bar'+i);
-            document.getElementById('bar'+i).style.display = "none";
-            if(i>=2)
-            {
-                document.getElementById(i).style.display = "none";
-            }
-                
-        }
-    }
-    function wybudujprzycisk()
-    {
-        for(var i = 1;i<=9;i++)
-        {
-            var przycisk = document.getElementById(i);
-            var nowy = document.createElement('input');
-            nowy.value = '+';
-            nowy.type = 'button';
-            nowy.id=i;
-            nowy.setAttribute("onclick",'wybudujBudynek(budynek'+i+',this.id)');
-            przycisk.parentNode.replaceChild(nowy, przycisk);
-        }
-            
-    }
-    function nowylvl()
-    {
-        console.log('123')
-        gracz.poziom +=1;
-        //if(blokada == false)
-        //{
-            //for(var i = 1;i<=9;i++)
-            //{
-                //bud = "budynek"+i;
-                //console.log(bud)
-                clearInterval(budynek1.interval);
-                clearInterval(budynek2.interval);
-                clearInterval(budynek3.interval);
-                clearInterval(budynek4.interval);
-                clearInterval(budynek5.interval);
-                clearInterval(budynek6.interval);
-                clearInterval(budynek7.interval);
-                clearInterval(budynek8.interval);
-                clearInterval(budynek9.interval);
-                var elm = document.getElementById(budynek1.pasek).style.width = 1 +'%';
-                //console.log(elm)
-                document.getElementById(budynek2.pasek).style.width = 1 +'%';
-                document.getElementById(budynek3.pasek).style.width = 1 +'%';
-                document.getElementById(budynek4.pasek).style.width = 1 +'%';
-                document.getElementById(budynek5.pasek).style.width = 1 +'%';
-                document.getElementById(budynek6.pasek).style.width = 1 +'%';
-                document.getElementById(budynek7.pasek).style.width = 1 +'%';
-                document.getElementById(budynek8.pasek).style.width = 1 +'%';
-                document.getElementById(budynek9.pasek).style.width = 1 +'%';
-                budynek1.counter = 0;
-                budynek2.counter = 0;
-                budynek3.counter = 0;
-                budynek4.counter = 0;
-                budynek5.counter = 0;
-                budynek6.counter = 0;
-                budynek7.counter = 0;
-                budynek8.counter = 0;
-                budynek9.counter = 0;
-            start();
-            wybudujprzycisk();
-        //}}
-    }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
