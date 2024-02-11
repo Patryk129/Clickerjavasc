@@ -37,7 +37,7 @@
     {
         nazwa: 'Drewno',
         mnoznik: 1,
-        zdjecie: 'drewno.png'
+        zdjecie: 'files/drewno.png'
     }
     gracz = 
     {
@@ -58,15 +58,15 @@
         this.counter = 0;
         this.interval;
     }
-    var budynek1 = new Cbudynek('budynek1',0,'budynek1.png');
-    var budynek2 = new Cbudynek('budynek2',0,'budynek2.png');
-    var budynek3 = new Cbudynek('budynek3',0,'budynek3.png');
-    var budynek4 = new Cbudynek('budynek4',0,'budynek4.png');
-    var budynek5 = new Cbudynek('budynek5',0,'budynek5.png');
-    var budynek6 = new Cbudynek('budynek6',0,'budynek6.png');
-    var budynek7 = new Cbudynek('budynek7',0,'budynek7.png');
-    var budynek8 = new Cbudynek('budynek8',0,'budynek8.png');
-    var budynek9 = new Cbudynek('budynek9',0,'budynek9.png');
+    var budynek1 = new Cbudynek('budynek1',0,'files/budynek1.png');
+    var budynek2 = new Cbudynek('budynek2',0,'files/budynek2.png');
+    var budynek3 = new Cbudynek('budynek3',0,'files/budynek3.png');
+    var budynek4 = new Cbudynek('budynek4',0,'files/budynek4.png');
+    var budynek5 = new Cbudynek('budynek5',0,'files/budynek5.png');
+    var budynek6 = new Cbudynek('budynek6',0,'files/budynek6.png');
+    var budynek7 = new Cbudynek('budynek7',0,'files/budynek7.png');
+    var budynek8 = new Cbudynek('budynek8',0,'files/budynek8.png');
+    var budynek9 = new Cbudynek('budynek9',0,'files/budynek9.png');
     var blokada = true;
     var cena = 0;
     var zarobki = 1;
@@ -210,7 +210,7 @@
         else if(gracz.budynki >= 9)
         {
             elem.style.width = gracz.budynki*11.1 + "%";
-            document.getElementById('nowylvl').src = 'poziom.png';
+            document.getElementById('nowylvl').src = 'files/poziom.png';
             blokada = false
         }
         else 
@@ -319,7 +319,7 @@
         {
             pauza4 = false;
             odpauza();
-            document.getElementById('pauza2').src = 'pauza.png';
+            document.getElementById('pauza2').src = 'files/pauza.png';
             
         }
         else 
@@ -327,7 +327,7 @@
             pauza4 = true;
             pauza();
             
-            document.getElementById('pauza2').src = 'odpauza.png';
+            document.getElementById('pauza2').src = 'files/odpauza.png';
         }    
     }
     function tempo1()
@@ -371,7 +371,7 @@
             var nowy = document.createElement('input');
             nowy.value = '+';
             nowy.type = 'image';
-            nowy.src = 'plus.png'
+            nowy.src = 'plus.files/png'
             nowy.id=i;
             nowy.setAttribute("onclick",'wybudujBudynek(budynek'+i+',this.id)');
             przycisk.parentNode.replaceChild(nowy, przycisk);
@@ -425,32 +425,32 @@
                 {
                     surowiec.nazwa = 'Kamien';
                     surowiec.mnoznik = 5;
-                    budynek1.zdjecie = 'kopalniak1.png';
-                    budynek2.zdjecie = 'kopalniak2.png'; 
-                    budynek3.zdjecie = 'kopalniak3.png';
-                    budynek4.zdjecie = 'kopalniak4.png';
-                    budynek5.zdjecie = 'kopalniak5.png';
-                    budynek6.zdjecie = 'kopalniak6.png';
-                    budynek7.zdjecie = 'kopalniak7.png';
-                    budynek8.zdjecie = 'kopalniak8.png';
-                    budynek9.zdjecie = 'kopalniak9.png';
-                    surowiec.zdjecie = 'kamien.png';
+                    budynek1.zdjecie = 'files/kopalniak1.png';
+                    budynek2.zdjecie = 'files/kopalniak2.png'; 
+                    budynek3.zdjecie = 'files/kopalniak3.png';
+                    budynek4.zdjecie = 'files/kopalniak4.png';
+                    budynek5.zdjecie = 'files/kopalniak5.png';
+                    budynek6.zdjecie = 'files/kopalniak6.png';
+                    budynek7.zdjecie = 'files/kopalniak7.png';
+                    budynek8.zdjecie = 'files/kopalniak8.png';
+                    budynek9.zdjecie = 'files/kopalniak9.png';
+                    surowiec.zdjecie = 'files/kamien.png';
                     gracz.poziom +=1;
                 }
                 else if(gracz.poziom == 2)
                 {
                     surowiec.nazwa = 'Zelazo'
                     surowiec.mnoznik = 10;
-                    budynek1.zdjecie = 'kopalnia1.png';
-                    budynek2.zdjecie = 'kopalnia2.png'; 
-                    budynek3.zdjecie = 'kopalnia3.png';
-                    budynek4.zdjecie = 'kopalnia4.png';
-                    budynek5.zdjecie = 'kopalnia5.png';
-                    budynek6.zdjecie = 'kopalnia6.png';
-                    budynek7.zdjecie = 'kopalnia7.png';
-                    budynek8.zdjecie = 'kopalnia8.png';
-                    budynek9.zdjecie = 'kopalnia9.png';
-                    surowiec.zdjecie = 'zelazo.png';
+                    budynek1.zdjecie = 'files/kopalnia1.png';
+                    budynek2.zdjecie = 'files/kopalnia2.png'; 
+                    budynek3.zdjecie = 'files/kopalnia3.png';
+                    budynek4.zdjecie = 'files/kopalnia4.png';
+                    budynek5.zdjecie = 'files/kopalnia5.png';
+                    budynek6.zdjecie = 'files/kopalnia6.png';
+                    budynek7.zdjecie = 'files/kopalnia7.png';
+                    budynek8.zdjecie = 'files/kopalnia8.png';
+                    budynek9.zdjecie = 'files/kopalnia9.png';
+                    surowiec.zdjecie = 'files/zelazo.png';
                     gracz.poziom +=1;
    
                 }
@@ -458,16 +458,16 @@
                 {
                     surowiec.nazwa = 'Zloto'
                     surowiec.mnoznik = 10;
-                    budynek1.zdjecie = 'kopalniaz1.png';
-                    budynek2.zdjecie = 'kopalniaz2.png'; 
-                    budynek3.zdjecie = 'kopalniaz3.png';
-                    budynek4.zdjecie = 'kopalniaz4.png';
-                    budynek5.zdjecie = 'kopalniaz5.png';
-                    budynek6.zdjecie = 'kopalniaz6.png';
-                    budynek7.zdjecie = 'kopalniaz7.png';
-                    budynek8.zdjecie = 'kopalniaz8.png';
-                    budynek9.zdjecie = 'kopalniaz9.png';
-                    surowiec.zdjecie = 'zloto.png';
+                    budynek1.zdjecie = 'files/kopalniaz1.png';
+                    budynek2.zdjecie = 'files/kopalniaz2.png'; 
+                    budynek3.zdjecie = 'files/kopalniaz3.png';
+                    budynek4.zdjecie = 'files/kopalniaz4.png';
+                    budynek5.zdjecie = 'files/kopalniaz5.png';
+                    budynek6.zdjecie = 'files/kopalniaz6.png';
+                    budynek7.zdjecie = 'files/kopalniaz7.png';
+                    budynek8.zdjecie = 'files/kopalniaz8.png';
+                    budynek9.zdjecie = 'files/kopalniaz9.png';
+                    surowiec.zdjecie = 'files/zloto.png';
                     gracz.poziom +=1;
    
                 }
@@ -475,16 +475,16 @@
                 {
                     surowiec.nazwa = 'Diament'
                     surowiec.mnoznik = 10;
-                    budynek1.zdjecie = 'kopalniad1.png';
-                    budynek2.zdjecie = 'kopalniad2.png'; 
-                    budynek3.zdjecie = 'kopalniad3.png';
-                    budynek4.zdjecie = 'kopalniad4.png';
-                    budynek5.zdjecie = 'kopalniad5.png';
-                    budynek6.zdjecie = 'kopalniad6.png';
-                    budynek7.zdjecie = 'kopalniad7.png';
-                    budynek8.zdjecie = 'kopalniad8.png';
-                    budynek9.zdjecie = 'kopalniad9.png';
-                    surowiec.zdjecie = 'diament.png';
+                    budynek1.zdjecie = 'files/kopalniad1.png';
+                    budynek2.zdjecie = 'files/kopalniad2.png'; 
+                    budynek3.zdjecie = 'files/kopalniad3.png';
+                    budynek4.zdjecie = 'files/kopalniad4.png';
+                    budynek5.zdjecie = 'files/kopalniad5.png';
+                    budynek6.zdjecie = 'files/kopalniad6.png';
+                    budynek7.zdjecie = 'files/kopalniad7.png';
+                    budynek8.zdjecie = 'files/kopalniad8.png';
+                    budynek9.zdjecie = 'files/kopalniad9.png';
+                    surowiec.zdjecie = 'files/diament.png';
                     gracz.poziom +=1;
    
                 }
