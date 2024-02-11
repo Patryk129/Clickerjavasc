@@ -59,7 +59,7 @@
     {
         var elem2 = document.getElementById(budynek.pasek);
         budynek.counter++;
-        console.log(budynek.counter);
+        // console.log(budynek.counter);
         if (budynek.counter > 5) 
         {
             gracz.zarobki += budynek.zarobki;
@@ -214,7 +214,7 @@
     {
         for(var i=1;i<=9;i++)
         {
-            console.log('bar'+i);
+            // console.log('bar'+i);
             document.getElementById('bar'+i).style.display = "none";
             document.getElementById('bar'+i).style.border = "none";
             document.getElementById('progress'+i).style.border = "none";
@@ -227,24 +227,28 @@
     }
     
     function pauza2()
-    {      
-        if(pauza4 == true)
+    {    
+        if(gracz.budynki>0)  
         {
-            pauza4 = false;
-            odpauza();
-            document.getElementById('pauza2').src = 'files/pauza.png';
+            if(pauza4 == true)
+            {
+                pauza4 = false;
+                odpauza();
+                document.getElementById('pauza2').src = 'files/pauza.png';
+            }
+            else 
+            {
+                pauza4 = true;
+                pauza();
+                
+                document.getElementById('pauza2').src = 'files/odpauza.png';
+            }    
+            if(dzwiek == true)
+            {
+                document.getElementById('click').play();
+            }
         }
-        else 
-        {
-            pauza4 = true;
-            pauza();
-            
-            document.getElementById('pauza2').src = 'files/odpauza.png';
-        }    
-        if(dzwiek == true)
-        {
-            document.getElementById('click').play();
-        }
+       
     }
 
     function tempo1()
@@ -253,7 +257,7 @@
         for(var i = 0;i<9;i++)
         {
             gracz.budynek[i]['pasekczas'] = 1000;
-            console.log(gracz.budynek[i]['pasekczas']);
+            // console.log(gracz.budynek[i]['pasekczas']);
             document.getElementById('bar'+(i+1)).style.backgroundColor = 'yellow';
         }
         if(dzwiek == true)
@@ -268,7 +272,7 @@
         for(var i = 0;i<9;i++)
         {
             gracz.budynek[i]['pasekczas'] = 500;
-            console.log(gracz.budynek[i]['pasekczas']);
+            // console.log(gracz.budynek[i]['pasekczas']);
             document.getElementById('bar'+(i+1)).style.backgroundColor = 'yellowgreen';
         }
         if(dzwiek == true)
@@ -284,7 +288,7 @@
         for(var i = 0;i<9;i++)
         {
             gracz.budynek[i]['pasekczas'] = 100;
-            console.log(gracz.budynek[i]['pasekczas']);
+            // console.log(gracz.budynek[i]['pasekczas']);
             document.getElementById('bar'+(i+1)).style.backgroundColor = 'lime';
         }
         if(dzwiek == true)
@@ -299,13 +303,15 @@
         if(dzwiek == true)
         {
             dzwiek = false;
-            document.getElementById('wycisz').src = "files/muzykaon.png";
+            document.getElementById('wycisz').src = "files/muzykaoff.png";
+            
         }
         else
         {
             dzwiek = true;
             document.getElementById('click').play();
-            document.getElementById('wycisz').src = "files/muzykaoff.png";
+            document.getElementById('wycisz').src = "files/muzykaon.png";
+           
         }
         
     }
@@ -327,7 +333,6 @@
     }
     function nowylvl()
     {
-        console.log('123')
         if(blokada == false)
         {
             clearInterval(budynek1.interval);
@@ -438,8 +443,8 @@
                 surowiec.mnoznik = 0;
 
             }
-            blokada = false;
-            if(muzyka == true)
+            blokada = true;
+            if(dzwiek == true)
             {
                 document.getElementById('lvlaudio').play();
             }
@@ -532,12 +537,10 @@
     {
         if(document.hidden) 
         {
-            console.log('Strona jest teraz niewidoczna. Pauza w programie.');
             pauza();
         } 
         else 
         {
-            console.log('Strona jest teraz widoczna. Wznawianie programu.');
             odpauza();
         }  
     }

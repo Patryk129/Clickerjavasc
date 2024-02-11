@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- <input type="button" onclick="start()" id="start" value="start"> -->
     <table id="tabela">
         <tr>
             <td colspan="4"><p id="poziom"></p></td>
@@ -41,7 +40,7 @@
                 </td>
             <td class="budynki"><div id="progress9"><div id="bar9"></div></div><input type='image' src="files/plus.png" onclick='wybudujBudynek(budynek9,this.id)' id="9">
                 </td>
-            <td class="infor">Surowiec:<p id="surowiec"></p><img src="drewno.png" id="surowieczdj"></td>
+            <td class="infor"><p id="surowiecinfo">Surowiec:</p><p id="surowiec"></p><img src="files/drewno.png" id="surowieczdj"></td>
         </tr>
         <tr>
             <td colspan="3">
@@ -54,11 +53,14 @@
             </td>
         </tr>
     </table>
-    <input type="image" src="files/pauza.png" onclick="pauza2()" id="pauza2">
-    <input type="image" src="files/tempo1.png" onclick="tempo1()" value=">" id="tempo1">
-    <input type="image" src="files/tempo2.png" onclick="tempo2()" value=">>" id="tempo2">
-    <input type="image" src="files/tempo3.png" onclick="tempo3()"value='>>>' id="tempo3">
-    <input type="image" src="files/muzykaoff.png" onclick="wycisz()" value='>>>' id="wycisz">
+    <div id="nav">
+        <input type="image" src="files/pauza.png" onclick="pauza2()" id="pauza2">
+        <input type="image" src="files/tempo1.png" onclick="tempo1()" value=">" id="tempo1">
+        <input type="image" src="files/tempo2.png" onclick="tempo2()" value=">>" id="tempo2">
+        <input type="image" src="files/tempo3.png" onclick="tempo3()"value='>>>' id="tempo3">
+        <input type="image" src="files/muzykaoff.png" onclick="wycisz()" value='>>>' id="wycisz">
+    </div>
+
     <audio id="cash">
         <source src="files/cash-register-purchase-87313.mp3" type="audio/ogg">
     </audio>
@@ -71,6 +73,8 @@
     <audio id="click">
         <source src="files/click.wav" type="audio/ogg">
     </audio>
+
     <script src="script.js"></script>
+    
 </body>
 </html>
