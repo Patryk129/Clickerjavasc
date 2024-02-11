@@ -371,7 +371,7 @@
             var nowy = document.createElement('input');
             nowy.value = '+';
             nowy.type = 'image';
-            nowy.src = 'plus.files/png'
+            nowy.src = 'files/plus.png'
             nowy.id=i;
             nowy.setAttribute("onclick",'wybudujBudynek(budynek'+i+',this.id)');
             przycisk.parentNode.replaceChild(nowy, przycisk);
