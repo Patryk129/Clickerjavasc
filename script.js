@@ -501,6 +501,7 @@
             // var zelazo = Csurowiec('zelazo',10);
             // var zloto = Csurowiec('zloto',15);
             // var diament = Csurowiec('diament',100);
+            blokada = true;
             document.getElementById('lvlaudio').play();
             wybudujprzycisk();
             start();
